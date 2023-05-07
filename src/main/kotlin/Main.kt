@@ -4,12 +4,10 @@ fun main(args: Array<String>) {
             if (!args[1].startsWith("-")) {
                 try {
                     NyanInterpreter(args[1]).run()
+                } catch (e: HandledException) {
+                    println("ERROR | ${e::class.simpleName} : ${e.message}")
                 } catch (e: Exception) {
-                    if (e is HandledException) {
-                        println("ERROR | ${e::class.simpleName} : ${e.message}")
-                    } else {
-                        println("Unexpected Error | ${e.stackTraceToString()}")
-                    }
+                    println("Unexpected Error | ${e.stackTraceToString()}")
                 }
             }
         }
