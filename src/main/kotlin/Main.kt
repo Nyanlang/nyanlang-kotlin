@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException
-
 fun main(args: Array<String>) {
     when (args[0]) {
         "run" -> {
@@ -7,10 +5,7 @@ fun main(args: Array<String>) {
                 try {
                     NyanInterpreter(args[1]).run()
                 } catch (e: Exception) {
-                    if (e is FileNotFoundException ||
-                        e is FileSuffixNotValidException ||
-                        e is SyntaxError ||
-                        e is UnexpectedParserError) {
+                    if (e is HandledException) {
                         println("ERROR | ${e::class.simpleName} : ${e.message}")
                     } else {
                         println("Unexpected Error | ${e.stackTraceToString()}")
